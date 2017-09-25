@@ -46,8 +46,8 @@ wait_until_all_pods_are_stopped() {
     done
 }
 
-oc new-project $DEFAULT_NAMESPACE
-oc project $DEFAULT_NAMESPACE
+oc new-project "${NAMESPACE:-${DEFAULT_NAMESPACE}}"
+oc project "${NAMESPACE:-${DEFAULT_NAMESPACE}}"
  
 oc get events -o json --watch-only | jq 'select (.type!="Normal") | .message' &
 MYSELF=$!
