@@ -45,6 +45,9 @@ wait_until_all_pods_are_stopped() {
         sleep ${POLLING_INTERVAL_SEC}
     done
 }
+
+oc new-project $DEFAULT_NAMESPACE
+oc project $DEFAULT_NAMESPACE
  
 oc get events -o json --watch-only | jq 'select (.type!="Normal") | .message' &
 MYSELF=$!
